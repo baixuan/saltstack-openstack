@@ -23,7 +23,7 @@ nova-install:
     - user: root
     - group: root
   cmd.run:
-    - name: cd /usr/local/src && tar zxf nova.tar.gz && cd nova && pip install --no-index -f http://10.0.0.163/pip -r tools/pip-requires && python setup.py install
+    - name: cd /usr/local/src && tar zxf nova.tar.gz && cd nova && pip install --no-index -f http://{{ pillar['kickstart']['SERVER_IP'] }}/pip -r tools/pip-requires && python setup.py install
     - require:
       - pkg: nova-init
       - file: /usr/local/src/nova.tar.gz
@@ -37,7 +37,7 @@ python-novaclient:
     - user: root
     - group: root
   cmd.run:
-    - name: cd /usr/local/src && tar zxf python_novaclient.tar.gz && cd python_novaclient && pip install --no-index -f http://10.0.0.163/pip -r tools/pip-requires && python setup.py install
+    - name: cd /usr/local/src && tar zxf python_novaclient.tar.gz && cd python_novaclient && pip install --no-index -f http://{{ pillar['kickstart']['SERVER_IP'] }}/pip -r tools/pip-requires && python setup.py install
     - require:
       - pkg: nova-init
       - file: /usr/local/src/python_novaclient.tar.gz

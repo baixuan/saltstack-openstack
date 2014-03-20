@@ -3,3 +3,8 @@ base:
     - keystone.keystone
     - cinder.cinder
     - nova.nova_compute
+
+  'minion2.cienet.com.cn':
+    - keystone.keystone
+    - cinder.cinder
+    - nova.nova_compute

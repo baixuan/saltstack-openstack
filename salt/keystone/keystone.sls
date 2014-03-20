@@ -17,7 +17,7 @@ keystone-install:
     - user: root
     - group: root
   cmd.run:
-    - name: cd /usr/local/src && tar zxf keystone.tar.gz && cd keystone && pip install --no-index -f http://10.0.0.163/pip -r tools/pip-requires && python setup.py install
+    - name: cd /usr/local/src && tar zxf keystone.tar.gz && cd keystone && pip install --no-index -f http://{{ pillar['kickstart']['SERVER_IP'] }}/pip -r tools/pip-requires && python setup.py install
     - require:
       - pkg: keystone-init
       - file: /usr/local/src/keystone.tar.gz
@@ -31,7 +31,7 @@ python-keystoneclient:
     - user: root
     - group: root
   cmd.run:
-    - name: cd /usr/local/src && tar zxf python_keystoneclient.tar.gz && cd python_keystoneclient && pip install --no-index -f http://10.0.0.163/pip -r tools/pip-requires && pip install hgtools -f http://10.0.0.163/pip && pip install --no-index pytest-runner -f http://10.0.0.163/pip && pip install --no-index keyring -f http://10.0.0.163/pip && python setup.py install
+    - name: cd /usr/local/src && tar zxf python_keystoneclient.tar.gz && cd python_keystoneclient && pip install --no-index -f http://{{ pillar['kickstart']['SERVER_IP'] }}/pip -r tools/pip-requires && pip install hgtools -f http://{{ pillar['kickstart']['SERVER_IP'] }}/pip && pip install --no-index pytest-runner -f http://{{ pillar['kickstart']['SERVER_IP'] }}/pip && pip install --no-index keyring -f http://{{ pillar['kickstart']['SERVER_IP'] }}/pip && python setup.py install
     - require:
       - pkg: keystone-init
       - file: /usr/local/src/python_keystoneclient.tar.gz
@@ -39,5 +39,5 @@ python-keystoneclient:
 
 python-amqplib:
   cmd.run:
-    - name: cd /tmp && wget http://10.0.0.163/python-amqplib-0.6.1-2.el6.noarch.rpm && rpm -ivh python-amqplib-0.6.1-2.el6.noarch.rpm
+    - name: cd /tmp && wget http://{{ pillar['kickstart']['SERVER_IP'] }}/python-amqplib-0.6.1-2.el6.noarch.rpm && rpm -ivh python-amqplib-0.6.1-2.el6.noarch.rpm
     - unless: rpm -qa |grep python-amqplib
