@@ -202,6 +202,13 @@ keystone_basic.sh:
     - mode: 755
     - user: root
     - group: root
+    - template: jinja
+    - defaults:
+      CONTROL_IP: {{ pillar['keystone']['CONTROL_IP'] }}
+      ADMIN_PASSWORD: {{ pillar['keystone']['ADMIN_PASSWORD'] }}
+      SERVICE_PASSWORD: {{ pillar['keystone']['SERVICE_PASSWORD'] }}
+      ADMIN_TOKEN: {{ pillar['keystone']['ADMIN_TOKEN'] }}
+      SERVICE_TENANT_NAME: {{ pillar['keystone']['SERVICE_TENANT_NAME'] }}
   cmd.run:
     - name: sh /tmp/keystone_basic.sh && touch /var/run/keystone-datainit.lock
     - require:
@@ -216,6 +223,15 @@ keystone_endpoints_basic.sh:
     - mode: 755
     - user: root
     - group: root
+    - template: jinja
+    - defaults:
+      CONTROL_IP: {{ pillar['keystone']['CONTROL_IP'] }}
+      KEYSTONE_USER: {{ pillar['keystone']['KEYSTONE_USER'] }}
+      KEYSTONE_DBNAME: {{ pillar['keystone']['KEYSTONE_DBNAME'] }}
+      MYSQL_SERVER: {{ pillar['keystone']['MYSQL_SERVER'] }}
+      KEYSTONE_PASS: {{ pillar['keystone']['KEYSTONE_PASS'] }}
+      KEYSTONE_REGION: {{ pillar['keystone']['KEYSTONE_REGION'] }}
+      ADMIN_TOKEN: {{ pillar['keystone']['ADMIN_TOKEN'] }}
   cmd.run:
     - name: sh /tmp/keystone_endpoints_basic.sh && /var/run/keystone-endpointinit.lock
     - require:
@@ -230,4 +246,8 @@ keystone_endpoints_basic.sh:
     - mode: 644
     - user: root
     - group: root
-
+    - template: jinja
+    - defaults:
+      ADMIN_PASSWORD: {{ pillar['keystone']['ADMIN_PASSWORD'] }}
+      CONTROL_IP: {{ pillar['keystone']['CONTROL_IP'] }}
+      ADMIN_TOKEN: {{ pillar['keystone']['ADMIN_TOKEN'] }}
