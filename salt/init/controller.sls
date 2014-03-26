@@ -43,7 +43,7 @@ mysql-server:
       - file: mysql-server
       - pkg: mysql-server
   cmd.run:
-    - name: mysqladmin -uroot password '{{ pillar['kickstart']['MYSQL_PASS'] }}' && mysql -uroot -p{{ pillar['kickstart']['MYSQL_PASS'] }} -e "grant all on *.* to 'root'@'localhost' identified by '{{ pillar['kickstart']['MYSQL_PASS'] }}';" && mysql -uroot -p{{ pillar['kickstart']['MYSQL_PASS'] }} -e "grant all on *.* to 'root'@'%' identified by '{{ pillar['kickstart']['MYSQL_PASS'] tmq-server}}';" 
+    - name: mysqladmin -uroot password '{{ pillar['kickstart']['MYSQL_PASS'] }}' && mysql -uroot -p{{ pillar['kickstart']['MYSQL_PASS'] }} -e "grant all on *.* to 'root'@'localhost' identified by '{{ pillar['kickstart']['MYSQL_PASS'] }}';" && mysql -uroot -p{{ pillar['kickstart']['MYSQL_PASS'] }} -e "grant all on *.* to 'root'@'%' identified by '{{ pillar['kickstart']['MYSQL_PASS'] }}';" 
 
 rabbitmq-server:
   pkg:
