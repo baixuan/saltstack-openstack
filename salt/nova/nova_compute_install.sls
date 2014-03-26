@@ -15,6 +15,13 @@ nova-init:
       - tunctl
       - python-numdisplay
 
+libvirt-run:
+  service.running:
+    - name: libvirtd
+    - enable: True
+    - require:
+      - pkg: nova-init
+
 nova-install:
   file.managed:
     - name: /usr/local/src/nova.tar.gz

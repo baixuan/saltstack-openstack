@@ -1,0 +1,6 @@
+export OS_TENANT_NAME=admin
+export OS_USERNAME=admin
+export OS_PASSWORD=admin_pass
+export OS_AUTH_URL="http://10.0.0.234:5000/v2.0/"
+export SERVICE_TOKEN="ADMIN"
+export SERVICE_ENDPOINT="http://10.0.0234:35357/v2.0"
